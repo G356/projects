@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<form>
+    <th:block th:fragment="input (type, label, name, value, format)">
+        <div class="form-group" th:class="${'form-group' + (valid ? '' : ' has-error')}"
+             th:with="valid=${!#fields.hasErrors(name)}">
+            <label class="col-sm-2 control-label" th:text="${label}">Label</label>
+            <div class="col-sm-3">
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input class="form-control" th:id="${name}" th:name="${name}" th:type="${type}" th:value="${(value != null) ? #temporals.format(value, format) : ''}"
+                           type="text"/>
+                    <span class="help-block" th:errors="*{__${name}__}" th:if="${!valid}">Error</span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</form>
+</body>
+</html>

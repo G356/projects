@@ -1,0 +1,52 @@
+<html layout:decorate="~{layouts/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>管理側ログイン</title>
+</head>
+<body class="login-page">
+<div layout:fragment="content">
+    <div class="login-box">
+        <div class="login-logo">
+            管理側ログイン
+        </div>
+        <div class="login-box-body">
+            <form class="form-horizontal" method="post" th:action="@{'/login'}" th:object="${loginForm}">
+                <div class="box-body">
+                    <div class="form-group" th:class="${'form-group' + (invalid ? ' has-error' : '')}"
+                         th:with="invalid=${#fields.hasErrors('loginId')}">
+                        <input autofocus="" class="form-control" name="loginId" placeholder="メールアドレス" th:value="*{loginId}"
+                               type="text"/>
+                        <span class="help-block" th:errors="*{loginId}" th:if="${invalid}">Error</span>
+                    </div>
+                    <div class="form-group" th:class="${'form-group' + (invalid ? ' has-error' : '')}"
+                         th:with="invalid=${#fields.hasErrors('password')}">
+                        <input class="form-control" name="password" placeholder="パスワード" type="password"/>
+                        <span class="help-block" th:errors="*{password}" th:if="${invalid}">Error</span>
+                    </div>
+                    <div class="form-group">
+                        <input name="rememberMe" type="checkbox" value="true"/>
+                        ログインしたままにする
+                    </div>
+                    <div class="form-group">
+                        <button class="btn bg-purple btn-block btn-flat" type="submit">ログイン</button>
+                    </div>
+                </div>
+            </form>
+            <a href="#" th:href="@{/resetPassword}">パスワードを忘れた場合</a>
+        </div>
+    </div>
+</div>
+<div layout:fragment="scripts">
+    <script th:inline="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("input").iCheck({
+                checkboxClass: "icheckbox_square-purple",
+                radioClass: "iradio_square-purple",
+                increaseArea: "20%"
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

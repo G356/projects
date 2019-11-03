@@ -1,0 +1,23 @@
+package com.sample.web.admin.controller.html.login;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+
+@Setter
+@Getter
+public class LoginForm implements Serializable {
+
+    private static final long serialVersionUID = 7593564324192730932L;
+
+    @NotEmpty
+    String loginId;
+
+    @NotEmpty
+    String password;
+
+    // ログインしたままにするか
+    boolean rememberMe;
+}

@@ -1,0 +1,13 @@
+rootProject.name = 'spring-boot-doma2-sample'
+include 'sample-common'
+include 'sample-domain'
+include 'sample-web-base'
+include 'sample-web-front'
+include 'sample-web-admin'
+include 'sample-batch'
+//include 'buildSrc'
+include 'it:sample-web-admin'
+findProject(':it:sample-web-admin')?.name = 'sample-web-admin'
+include 'it:sample-web-front'
+findProject(':it:sample-web-front')?.name = 'sample-web-front'
+

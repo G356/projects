@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="paginator (p, url)">
+    <div th:if="${p} != null">
+        <ul class="pagination pagination-sm no-margin pull-right">
+            <li style="display:inline" th:class="${first} ? 'disabled':''" th:with="first=${p.page} == 1">
+                <span th:if="${first}"><i class="fa fa-angle-double-left"></i></span>
+                <a th:href="@{${url}(page=1)}" th:if="${not first}"><i class="fa fa-angle-double-left"></i></a>
+            </li>
+            <li style="display:inline" th:class="${first} ? 'disabled':''" th:with="first=${p.page} == 1">
+                <span th:if="${first}"><i class="fa fa-angle-left"></i></span>
+                <a th:href="@{${url}(page=${p.page} - 1)}" th:if="${not first}"><i class="fa fa-angle-left"></i></a>
+            </li>
+            <li style="display:inline" th:class="(${i} == ${p.page}) ? 'active' : ''"
+                th:each="i : ${#numbers.sequence(1, p.totalPages)}">
+                <span th:if="${i} == ${p.page}" th:text="${i}">1</span>
+                <a th:href="@{${url}(page=${i})}"
+                   th:if="${i} != ${p.page} and (${p.page} - 5) < ${i} and ${i} < (${p.page} + 5)">
+                    <span th:text="${i}">1</span>
+                </a>
+            </li>
+            <li style="display:inline" th:class="${last} ? 'disabled':''" th:with="last=(${p.page} == ${p.totalPages})">
+                <span th:if="${last}"><i class="fa fa-angle-right"></i></span>
+                <a th:href="@{${url}(page=(${p.page} + 1))}" th:if="${not last}"><i class="fa fa-angle-right"></i></a>
+            </li>
+            <li style="display:inline" th:class="${last} ? 'disabled':''" th:with="last=(${p.page} == ${p.totalPages})">
+                <span th:if="${last}"><i class="fa fa-angle-double-right"></i></span>
+                <a th:href="@{${url}(page=(${p.totalPages}))}" th:if="${not last}"><i
+                        class="fa fa-angle-double-right"></i></a>
+            </li>
+        </ul>
+    </div>
+</th:block>
+</body>
+</html>
