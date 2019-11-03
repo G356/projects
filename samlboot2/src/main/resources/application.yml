@@ -1,0 +1,20 @@
+management:
+  security:
+    require-ssl: true
+    enabled: false
+  context-path: "/manage"
+logging.level.org.springframework.security.saml: DEBUG
+server:
+  #https端口号.
+  port: 5000
+  ssl:
+    enabled: true
+    #证书别名
+    key-alias: tomcat
+    #秘钥库类型
+    key-store-type: PKCS12
+    #证书的路径.
+    key-store: classpath:keystore.p12
+    #证书密码，请修改为您自己证书的密码.
+    key-store-password: https123
+    protocol: TLS
